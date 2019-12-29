@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Weather = () => {
+const Weather = (props) => {
   return(
     <div className="container">
       <div className="cards">
@@ -12,7 +12,9 @@ const Weather = () => {
       </h5>
 
       <h1 className="py-2">25&deg;</h1>
+
       {/*  show min and max temp*/}
+
       {minmaxTemp(24,19)}
 
       <h4 className="py-3">raining</h4>

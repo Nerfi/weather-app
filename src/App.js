@@ -6,11 +6,12 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import "weather-icons/css/weather-icons.css";
 
 
-//const API_key = "b5014333f2554516a7172c05dbe90c57";
+const API_key = "b5014333f2554516a7172c05dbe90c57";
 
 const App = ()=> {
   // settig the initial state
-  const [city, setCity] = useState({});
+  const [city, setCity] = useState({weather: {}, loading: true});
+  const [country, setCountry] = useState({});
 
 
   // making the API call
@@ -20,13 +21,14 @@ const App = ()=> {
     const response = await weather.json();
 
 
+
     setCity(response);
   }
 
   useEffect(() => {
     fetchWeather();
-  },[]);
 
+  },[]);
 
   return (
     <div className="App">
