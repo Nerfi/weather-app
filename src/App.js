@@ -4,6 +4,7 @@ import './App.css';
 import Weather from './components/weather';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "weather-icons/css/weather-icons.css";
+import Form from './components/form';
 
 
 const API_key = "b5014333f2554516a7172c05dbe90c57";
@@ -14,15 +15,10 @@ const App = (props)=> {
   const [country, setCountry] = useState({}); // empty object as a initial state
 
   // stiil need to add some more states
-  const [icon, setIcons] = useState({});
-
-  // maybe I'll not need this
-  //const [celcius, setCelcius] = useState([]);
-  // maybe I'll not need this
- // const [temMax, setTemMax] = useState([]);
-
+  const [icon, setIcons] = useState({icon:undefined, Loading: true});
 
   async function fetchCity() {
+      //e.preventDefault();
     const weather = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=London,uk&appid=${API_key}`);
     const response = await weather.json();
 
@@ -97,7 +93,7 @@ const App = (props)=> {
 
      }
 
-     get_WeatherIcon(weatherIcon);
+    // get_WeatherIcon(setIcons);
 
     //check reddit answer for this if stament
 
@@ -109,6 +105,8 @@ const App = (props)=> {
   return (
     <div className="App">
       <h1>Weather app</h1>
+
+      <Form loadweather={fetchCity(city.name)} />
 
       <Weather city={city.name}
       country={country.sys.country}
