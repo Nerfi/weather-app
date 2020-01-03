@@ -9,21 +9,17 @@ import "weather-icons/css/weather-icons.css";
 const API_key = "b5014333f2554516a7172c05dbe90c57";
 
 const App = (props)=> {
-  // settig the initial state
 
   const [city, setCity] = useState([]);
   const [country, setCountry] = useState({}); // empty object as a initial state
 
   // stiil need to add some more states
-  const [icon, setIcons] = useState([]);
-  const [main, setMain] = useState([]);
+  const [icon, setIcons] = useState({});
+
   // maybe I'll not need this
   //const [celcius, setCelcius] = useState([]);
   // maybe I'll not need this
  // const [temMax, setTemMax] = useState([]);
-  const [temMin, setTemMin] = useState([]);
-  const [description, setDescription] = useState("");
-  // añdir error message pero ahora no
 
 
   async function fetchCity() {
@@ -31,7 +27,6 @@ const App = (props)=> {
     const response = await weather.json();
 
     setCity(response);
-
 
   }
 
@@ -59,19 +54,56 @@ const App = (props)=> {
     function calCelsius(temp){
     let cell = Math.floor(temp - 273.15);
     return cell;
-  }
+    }
 
-  //weather icon
-  const weatherIcon = {
-    Thunderstorm: "wi-thunderstorm"
-  };
+
+     const weatherIcon = {
+      Thunderstorm: "wi-thunderstorm",
+      Drizzle: "wi-sleet",
+      Rain: "wi-storm-showers",
+      Snow: "wi-snow",
+      Atmosphere: "wi-fog",
+      Clear: "wi-day-sunny",
+      Clouds: "wi-day-fog"
+     }
+
+     function get_WeatherIcon(icons,rangeId) {
+      switch(true) {
+        case rangeId >= 200 && rangeId < 232:
+        setIcons({icon: weatherIcon.Thunderstorm});
+        break;
+        case rangeId >= 300 && rangeId <= 321:
+        setIcons({icons: icons.Drizzle});
+        break;
+         case rangeId >= 500 && rangeId <= 521:
+        setIcons({ icon: icons.Rain });
+        break;
+      case rangeId >= 600 && rangeId <= 622:
+        setIcons({ icon: icons.Snow });
+        break;
+      case rangeId >= 701 && rangeId <= 781:
+        setIcons({ icon: icons.Atmosphere });
+        break;
+      case rangeId === 800:
+        setIcons({ icon: icons.Clear });
+        break;
+      case rangeId >= 801 && rangeId <= 804:
+        setIcons({ icon: icons.Clouds });
+        break;
+        default:
+        setIcons({icon: icons.Clouds});
+
+      }
+
+     }
+
+     get_WeatherIcon(weatherIcon);
 
     //check reddit answer for this if stament
 
       if (!country.sys) {
       return (<div>Loading...</div>);
       }
-
 
 
   return (
@@ -84,7 +116,7 @@ const App = (props)=> {
       temp_min={calCelsius(city.main.temp_min)}
       temp_max={calCelsius(city.main.temp_max)}
       description={city.weather[0].description}
-      weatherIcon={city.weather}
+      weatherIcon={""}
       />
 
     </div>

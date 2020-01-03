@@ -19,7 +19,7 @@ const Weather = (props) => {
       <h1>{props.city}, {props.country} </h1>
       <h5 className="py-4">
 
-        <i className={'wi ${props.weatherIcon} display-1'}></i>
+        <i className={`wi ${props.weatherIcon} display-1`}></i>
 
       </h5>
 
