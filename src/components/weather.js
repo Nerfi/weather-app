@@ -13,12 +13,13 @@ const Weather = (props) => {
 
 
   return(
+
     <div className="container">
       <div className="cards">
       <h1>{props.city}, {props.country} </h1>
       <h5 className="py-4">
-        {/* check dosc for more info*/}
-        <i className="wi wi-day-sunny display-1"></i>
+
+        <i className={'wi ${props.weatherIcon} display-1'}></i>
 
       </h5>
 

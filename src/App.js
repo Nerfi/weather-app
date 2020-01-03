@@ -12,13 +12,15 @@ const App = (props)=> {
   // settig the initial state
 
   const [city, setCity] = useState([]);
-  const [country, setCountry] = useState({}); // mepty object as a initial state
+  const [country, setCountry] = useState({}); // empty object as a initial state
 
   // stiil need to add some more states
   const [icon, setIcons] = useState([]);
   const [main, setMain] = useState([]);
-  const [celcius, setCelcius] = useState([]);
-  const [temMax, setTemMax] = useState([]);
+  // maybe I'll not need this
+  //const [celcius, setCelcius] = useState([]);
+  // maybe I'll not need this
+ // const [temMax, setTemMax] = useState([]);
   const [temMin, setTemMin] = useState([]);
   const [description, setDescription] = useState("");
   // añdir error message pero ahora no
@@ -29,7 +31,7 @@ const App = (props)=> {
     const response = await weather.json();
 
     setCity(response);
-    //console.log(response);
+
 
   }
 
@@ -53,11 +55,24 @@ const App = (props)=> {
 
     },[]);
 
+
+    function calCelsius(temp){
+    let cell = Math.floor(temp - 273.15);
+    return cell;
+  }
+
+  //weather icon
+  const weatherIcon = {
+    Thunderstorm: "wi-thunderstorm"
+  };
+
     //check reddit answer for this if stament
 
       if (!country.sys) {
       return (<div>Loading...</div>);
       }
+
+
 
   return (
     <div className="App">
@@ -65,10 +80,11 @@ const App = (props)=> {
 
       <Weather city={city.name}
       country={country.sys.country}
-      temp_celsius={""}
-      temp_min={""}
-      temp_max={""}
-      description={""}
+      temp_celsius={calCelsius(city.main.temp)}
+      temp_min={calCelsius(city.main.temp_min)}
+      temp_max={calCelsius(city.main.temp_max)}
+      description={city.weather[0].description}
+      weatherIcon={city.weather}
       />
 
     </div>
