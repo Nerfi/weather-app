@@ -17,15 +17,27 @@ const App = (props)=> {
   // stiil need to add some more states
   const [icon, setIcons] = useState({icon:undefined, Loading: true});
 
+
+      //re-doing the up hook
+
   async function fetchCity(e){
       //e.preventDefault();
-    const city = e.target.elements.city.value; //Unhandled Rejection (TypeError): Cannot read property 'target' of undefined
+   // const city = e.target.elements.city.value; //Unhandled Rejection (TypeError): Cannot read property 'target' of undefined
 
     const weather = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city},${country}&appid=${API_key}`);
     const response = await weather.json();
 
 
-    setCity(response);
+   setCity({
+    city: `${response.name}, ${response.sys.country}`,
+        country: response.sys.country,
+        main: response.weather[0].main,
+        celsius: calCelsius(response.main.temp),
+        temp_max: calCelsius(response.main.temp_max),
+        temp_min: calCelsius(response.main.temp_min),
+        description: response.weather[0].description,
+        error: false
+   });
 
   }
 
@@ -110,15 +122,16 @@ const App = (props)=> {
     <div className="App">
       <h1>Weather app</h1>
 
-      <Form loadweather={""} />
+      <Form loadweather={fetchCity} error={city.error} />
 
-      <Weather city={city.name}
-      country={country.sys.country}
-      temp_celsius={calCelsius(city.main.temp)}
-      temp_min={calCelsius(city.main.temp_min)}
-      temp_max={calCelsius(city.main.temp_max)}
-      description={city.weather[0].description}
-      weatherIcon={""}
+      <Weather
+      city={city.name}
+      country={country.country}
+      temp_celsius={city.celsius}
+      temp_min={city.temp_min}
+      temp_max={city.temp_max}
+      description={city.main}
+      weatherIcon={city.icon}
       />
 
     </div>
