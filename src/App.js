@@ -17,10 +17,13 @@ const App = (props)=> {
   // stiil need to add some more states
   const [icon, setIcons] = useState({icon:undefined, Loading: true});
 
-  async function fetchCity() {
+  async function fetchCity(e){
       //e.preventDefault();
-    const weather = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=London,uk&appid=${API_key}`);
+    const city = e.target.elements.city.value; //Unhandled Rejection (TypeError): Cannot read property 'target' of undefined
+
+    const weather = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city},${country}&appid=${API_key}`);
     const response = await weather.json();
+
 
     setCity(response);
 
@@ -51,6 +54,7 @@ const App = (props)=> {
     let cell = Math.floor(temp - 273.15);
     return cell;
     }
+
 
 
      const weatherIcon = {
@@ -106,7 +110,7 @@ const App = (props)=> {
     <div className="App">
       <h1>Weather app</h1>
 
-      <Form loadweather={fetchCity(city.name)} />
+      <Form loadweather={""} />
 
       <Weather city={city.name}
       country={country.sys.country}
