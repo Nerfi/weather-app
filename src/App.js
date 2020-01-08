@@ -14,19 +14,14 @@ const App = (props)=> {
   const [city, setCity] = useState([]);
   const [country, setCountry] = useState({}); // empty object as a initial state
 
-  // stiil need to add some more states
-  const [icon, setIcons] = useState({});
+  const [icon, setIcon] = useState([]);
 
-
-      //re-doing the up hook
-
-  async function fetchCity(e){
-      //e.preventDefault();
+  async function fetchCity(){
+      //e.preventDefault(); not working
    // const city = e.target.elements.city.value; //Unhandled Rejection (TypeError): Cannot read property 'target' of undefined
 
     const weather = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city},${country}&appid=${API_key}`);
     const response = await weather.json();
-
 
    setCity({
     city: `${response.name}, ${response.sys.country}`,
@@ -46,7 +41,7 @@ const App = (props)=> {
 
   },[]);
 
-
+// not sure if I need this or not
     async function fetchCountry() {
     const country = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=London,uk&appid=${API_key}`);
     const response = await country.json();
@@ -69,47 +64,47 @@ const App = (props)=> {
 
 
 
-     const weatherIcon = {
-      Thunderstorm: "wi-thunderstorm",
-      Drizzle: "wi-sleet",
-      Rain: "wi-storm-showers",
-      Snow: "wi-snow",
-      Atmosphere: "wi-fog",
-      Clear: "wi-day-sunny",
-      Clouds: "wi-day-fog"
-     }
+     //const weatherIcon = {
+      //Thunderstorm: "wi-thunderstorm",
+      //Drizzle: "wi-sleet",
+      //Rain: "wi-storm-showers",
+      //Snow: "wi-snow",
+      //Atmosphere: "wi-fog",
+      //Clear: "wi-day-sunny",
+     // Clouds: "wi-day-fog"
+     //}
 
      function get_WeatherIcon(icons,rangeId) {
       switch(true) {
+        //check changes made here
         case rangeId >= 200 && rangeId < 232:
-        setIcons({icon: weatherIcon.Thunderstorm});
+        setIcon({icon: icon.Thunderstorm});
         break;
         case rangeId >= 300 && rangeId <= 321:
-        setIcons({icons: icons.Drizzle});
+        setIcon({icons: icons.Drizzle});
         break;
          case rangeId >= 500 && rangeId <= 521:
-        setIcons({ icon: icons.Rain });
+        setIcon({ icon: icons.Rain });
         break;
       case rangeId >= 600 && rangeId <= 622:
-        setIcons({ icon: icons.Snow });
+        setIcon({ icon: icons.Snow });
         break;
       case rangeId >= 701 && rangeId <= 781:
-        setIcons({ icon: icons.Atmosphere });
+        setIcon({ icon: icons.Atmosphere });
         break;
       case rangeId === 800:
-        setIcons({ icon: icons.Clear });
+        setIcon({ icon: icons.Clear });
         break;
       case rangeId >= 801 && rangeId <= 804:
-        setIcons({ icon: icons.Clouds });
+        setIcon({ icon: icons.Clouds });
         break;
         default:
-        setIcons({icon: icons.Clouds});
+        setIcon({icon: icons.Clouds});
 
       }
 
      }
 
-    // get_WeatherIcon(setIcons);
 
     //check reddit answer for this if stament
 
@@ -122,7 +117,7 @@ const App = (props)=> {
     <div className="App">
       <h1>Weather app</h1>
 
-      <Form loadweather={fetchCity} error={city.error} />
+      <Form loadweather={fetchCity} />
 
       <Weather
       city={city.name}
