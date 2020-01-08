@@ -15,7 +15,7 @@ const App = (props)=> {
   const [country, setCountry] = useState({}); // empty object as a initial state
 
   // stiil need to add some more states
-  const [icon, setIcons] = useState({icon:undefined, Loading: true});
+  const [icon, setIcons] = useState({});
 
 
       //re-doing the up hook
