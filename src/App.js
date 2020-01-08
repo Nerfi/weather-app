@@ -62,8 +62,6 @@ const App = (props)=> {
     return cell;
     }
 
-
-
      //const weatherIcon = {
       //Thunderstorm: "wi-thunderstorm",
       //Drizzle: "wi-sleet",
@@ -78,7 +76,7 @@ const App = (props)=> {
       switch(true) {
         //check changes made here
         case rangeId >= 200 && rangeId < 232:
-        setIcon({icon: icon.Thunderstorm});
+        setIcon({icon: icons.Thunderstorm});
         break;
         case rangeId >= 300 && rangeId <= 321:
         setIcon({icons: icons.Drizzle});
