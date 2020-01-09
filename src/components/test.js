@@ -47,8 +47,6 @@ const App = (props)=> {
 
     setCountry(response);
 
-    //console.log("response obt here",response);
-
   }
     useEffect(() => {
       fetchCountry();
