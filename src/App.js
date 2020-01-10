@@ -1,5 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.css';
-import React ,{useState, useEffect}from 'react';
+import React ,{useState}from 'react';
 import './App.css';
 import Weather from './components/weather';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -25,12 +25,13 @@ const [icon, setIcon] = useState({
 
   async function fetchData (e){
     e.preventDefault();
-     const country = e.target.elements.country.value;
     const city = e.target.elements.city.value;
+     const country = e.target.elements.country.value;
 
     const weather = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=q=${city},${country}&appid=${API_key}`);
     const response = await weather.json();
     setFields(response);
+
 
   }
 
@@ -48,8 +49,8 @@ function calCelsius(temp){
 
 
 
- // if (!fields.sys) {
-   //   return (<div>Loading...</div>);
+  //if (!fields.sys) {
+    //  return (<div>Loading...</div>);
      // }
 
 
@@ -63,7 +64,7 @@ function calCelsius(temp){
       <Weather
       city={fields.name}
       country={fields.country}
-      temp_celsius={fields.celsius}
+      temp_celsius={calCelsius(fields.main.temp)}
       temp_min={fields.temp_min}
       temp_max={fields.temp_max}
       description={fields.main}
