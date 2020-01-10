@@ -23,29 +23,53 @@ const [icon, setIcon] = useState({
       Clouds: "wi-day-fog"
  });
 
-  async function fetchData (){
-   // e.preventDefault();
-    const data = await fetch(`api.openweathermap.org/data/2.5/weather?q=London,uk&appid=${API_key}`);
-    const response = await data.json();
+  async function fetchData (e){
+    e.preventDefault();
+     const country = e.target.elements.country.value;
+    const city = e.target.elements.city.value;
+
+    const weather = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=q=${city},${country}&appid=${API_key}`);
+    const response = await weather.json();
     setFields(response);
-  console.log(response);
 
   }
 
-useEffect(() => {
-  fetchData();
 
-},[]);
+//useEffect(() => {
+  //fetchData();
+
+//},[]);
+
+
+function calCelsius(temp){
+    let cell = Math.floor(temp - 273.15);
+    return cell;
+    }
+
+
+
+ // if (!fields.sys) {
+   //   return (<div>Loading...</div>);
+     // }
+
+
 
   return(
-    <div className="App">
-    <h1>Weather app</h1>
-    <Form loadweather={""}/>
+  <div className="App">
+      <h1>Weather app</h1>
 
-    <Weather
-    city={fields.name}
-    country={fields.country}
-    />
+      <Form loadweather={fetchData} />
+
+      <Weather
+      city={fields.name}
+      country={fields.country}
+      temp_celsius={fields.celsius}
+      temp_min={fields.temp_min}
+      temp_max={fields.temp_max}
+      description={fields.main}
+      weatherIcon={fields.icon}
+      />
+
 
     </div>
     );
@@ -54,3 +78,6 @@ useEffect(() => {
 
 
 export default App;
+
+
+

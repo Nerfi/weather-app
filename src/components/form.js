@@ -4,7 +4,7 @@ import './form.style.css';
 const Form = props => {
   return(
     <div className="container">
-    <form onSubmit={props.loadweather(country, city)}>
+    <form onSubmit={props.loadweather}>
       <div className="row">
         <div className="col-md-3 offset-md-2">
         <input type="text"
