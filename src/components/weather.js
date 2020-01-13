@@ -14,7 +14,7 @@ const Weather = (props) => {
 
   return(
 
-    <div className="container">
+    <div className="container text-light">
       <div className="cards pt-4">
       <h1>  {props.city}, {props.country}   </h1>
       <h5 className="py-4">
@@ -30,7 +30,8 @@ const Weather = (props) => {
       {minmaxTemp(props.temp_min, props.temp_max)}
 
 
-      <h3 className="py-3"> {props.description}</h3>
+      {/* no clue why if I delete this is working the appIm block
+       <h3 className="py-3"> {props.description} </h3> */}
 
       </div>
     </div>
