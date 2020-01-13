@@ -11,7 +11,7 @@ function App (props) {
 
 const API_key = "5dca448e69234b2a6a26f52ed3883a47";
 
-const [fields, setFields] = useState([]);
+const [fields, setFields] = useState({city: '', country: ''});
 
 const [icon, setIcon] = useState({
       Thunderstorm: "wi-thunderstorm",
@@ -67,7 +67,7 @@ function calCelsius(temp){
 
       <Weather
       city={fields.name}
-     /* country={fields.country} */
+      country={fields.country}
       /*temp_celsius={calCelsius(fields.main.temp)}*/
       temp_min={calCelsius(fields.temp_min)}
       temp_max={calCelsius(fields.temp_max)}

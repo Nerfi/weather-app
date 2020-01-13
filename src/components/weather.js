@@ -1,5 +1,8 @@
 import React from 'react';
 
+
+const Weather = (props) => {
+
   function minmaxTemp(min,max) {
   return(
       <h3>
@@ -8,9 +11,6 @@ import React from 'react';
       </h3>
       );
     }
-
-const Weather = (props) => {
-
 
   return(
 
