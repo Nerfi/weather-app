@@ -9,7 +9,7 @@ import Form from './components/form';
 
 function App (props) {
 
-const API_key = "b5014333f2554516a7172c05dbe90c57";
+const API_key = "5dca448e69234b2a6a26f52ed3883a47";
 
 const [fields, setFields] = useState({city: '', country: ''});
 
@@ -25,17 +25,20 @@ const [icon, setIcon] = useState({
 
   async function fetchData (e){
     e.preventDefault();
-    const city = e.target.elements.city.value;
-     const country = e.target.elements.country.value;
+    //const city = e.target.elements.city.value;
+     //const country = e.target.elements.country.value;
 
-    const weather = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=q=${city},${country}&appid=${API_key}`);
+    //const weather = await fetch(`http:api.openweathermap.org/data/2.5/weather?q=q=${city},${country}&appid=${API_key}`);
+    const weather = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=London,uk&appid=${API_key}`);
     const response = await weather.json();
+    console.log(response);
     setFields(response);
-
 
   }
 
 
+// aqui esto no procede porque no estamos cargando data una vez el componentDidMount, aqui esperamos a realizar una accion para cargar los datos,
+// no al principio cuando se ha montado el component
 //useEffect(() => {
   //fetchData();
 
@@ -49,9 +52,9 @@ function calCelsius(temp){
 
 
 
-  //if (!fields.sys) {
+  //if (fields.sys) {
     //  return (<div>Loading...</div>);
-     // }
+      //}
 
 
 
@@ -64,10 +67,10 @@ function calCelsius(temp){
       <Weather
       city={fields.name}
       country={fields.country}
-      temp_celsius={calCelsius(fields.main.temp)}
-      temp_min={fields.temp_min}
-      temp_max={fields.temp_max}
-      description={fields.main}
+      /*temp_celsius={calCelsius(fields.main.temp)}*/
+      temp_min={calCelsius(fields.temp_min)}
+      temp_max={calCelsius(fields.temp_max)}
+      description={fields.weather}
       weatherIcon={fields.icon}
       />
 
