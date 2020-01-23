@@ -12,7 +12,7 @@ function App (props) {
 const API_key = "5dca448e69234b2a6a26f52ed3883a47";
 
 const [fields, setFields] = useState({});
-//console.log(fields);
+
 
 const [icon, setIcon] = useState({
       Thunderstorm: "wi-thunderstorm",
@@ -30,22 +30,29 @@ const [icon, setIcon] = useState({
      const country = e.target.elements.country.value;
 
 
-    const weather = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city},${country}&appid=${API_key}`);
-    const response = await weather.json();
+     if(country && city){
 
-    setFields({
-        city: `${response.name}, ${response.sys.country}`,
-        country: response.sys.country,
-        main: response.weather[0].main,
-        celsius: calCelsius(response.main.temp),
-        temp_max: calCelsius(response.main.temp_max),
-        temp_min: calCelsius(response.main.temp_min),
-        description: response.weather[0].description,
+        const weather = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city},${country}&appid=${API_key}`);
+        const response = await weather.json();
 
-    })
+        setFields({
+            city: `${response.name}, ${response.sys.country}`,
+            country: response.sys.country,
+            main: response.weather[0].main,
+            celsius: calCelsius(response.main.temp),
+            temp_max: calCelsius(response.main.temp_max),
+            temp_min: calCelsius(response.main.temp_min),
+            description: response.weather[0].description,
+            error: false
 
+        })
+        console.log(response);
+        console.log(fields && fields);
 
-    console.log(response);
+     } else {
+      alert("City and Country are required")
+     }
+
 
   }
 
