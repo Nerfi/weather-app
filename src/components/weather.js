@@ -16,7 +16,8 @@ const Weather = (props) => {
 
     <div className="container text-light">
       <div className="cards pt-4">
-      <h1>  {props.city}, {props.country}   </h1>
+
+      <h1>  {props.city}, {props.country} </h1>
       <h5 className="py-4">
 
         <i className={`wi ${props.weatherIcon} display-1`}></i>
@@ -27,11 +28,9 @@ const Weather = (props) => {
 
       {/*  show min and max temp*/}
 
-      {minmaxTemp(props.temp_min, props.temp_max)}
+       {minmaxTemp(props.temp_min, props.temp_max)}
 
-
-      {/* no clue why if I delete this is working the appIm block
-       <h3 className="py-3"> {props.description} </h3> */}
+       <h3 className="py-3"> {props.description} </h3>
 
       </div>
     </div>

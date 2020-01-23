@@ -11,7 +11,8 @@ function App (props) {
 
 const API_key = "5dca448e69234b2a6a26f52ed3883a47";
 
-const [fields, setFields] = useState({city: '', country: ''});
+const [fields, setFields] = useState({});
+//console.log(fields);
 
 const [icon, setIcon] = useState({
       Thunderstorm: "wi-thunderstorm",
@@ -32,7 +33,18 @@ const [icon, setIcon] = useState({
     const weather = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city},${country}&appid=${API_key}`);
     const response = await weather.json();
 
-    setFields(response);
+    setFields({
+        city: `${response.name}, ${response.sys.country}`,
+        country: response.sys.country,
+        main: response.weather[0].main,
+        celsius: calCelsius(response.main.temp),
+        temp_max: calCelsius(response.main.temp_max),
+        temp_min: calCelsius(response.main.temp_min),
+        description: response.weather[0].description,
+
+    })
+
+
     console.log(response);
 
   }
@@ -46,17 +58,10 @@ const [icon, setIcon] = useState({
 //},[]);
 
 
-function calCelsius(temp){
-    let cell = Math.floor(temp - 273.15);
+function calCelsius(temperatura){
+    let cell = Math.floor(temperatura - 273.15);
     return cell;
     }
-
-
-
-  //if (fields.sys) {
-    //  return (<div>Loading...</div>);
-      //}
-
 
 
   return(
@@ -65,13 +70,14 @@ function calCelsius(temp){
 
       <Form loadweather={fetchData} />
 
+
       <Weather
-      city={fields.name}
+      city={fields.city}
       country={fields.country}
-      /*temp_celsius={calCelsius(fields.main.temp)}*/
-      temp_min={calCelsius(fields.temp_min)}
-      temp_max={calCelsius(fields.temp_max)}
-      description={fields.weather}
+      temp_celsius={fields.celsius}
+      temp_min={fields.temp_min}
+      temp_max={fields.temp_max}
+      description={fields.description}
       weatherIcon={fields.icon}
       />
 
