@@ -11,7 +11,7 @@ function App () {
 
 const API_key = "5dca448e69234b2a6a26f52ed3883a47";
 
-const [fields, setFields] = useState([]);
+const [fields, setFields] = useState({});
 
 
 const [icon, setIcon] = useState({
@@ -27,9 +27,10 @@ const [icon, setIcon] = useState({
 
   async function fetchData(e) {
 
-      e.preventDefault();
-      const city = e.target.elements.city.value;
-       const country = e.target.elements.country.value;
+        e.preventDefault();
+        const city = e.target.elements.city.value;
+         const country = e.target.elements.country.value;
+
      try{
 
       if(country && city){
@@ -48,7 +49,7 @@ const [icon, setIcon] = useState({
               error: false
 
           })
-          console.log(response.data && response.data);
+          console.log(response.data);
 
        } else {
         alert("City and Country are required");
@@ -60,7 +61,7 @@ const [icon, setIcon] = useState({
       console.log(error && error);
 
      }
-    fetchData();
+    //fetchData(); I get an error is I call the function dont know why
   }
 
 
