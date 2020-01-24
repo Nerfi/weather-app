@@ -11,8 +11,7 @@ function App () {
 
 const API_key = "5dca448e69234b2a6a26f52ed3883a47";
 
-const [fields, setFields] = useState({});
-
+const [fields, setFields] = useState({city: 'Madrid', country:''});
 
 const [icon, setIcon] = useState({
       Thunderstorm: "wi-thunderstorm",
@@ -29,7 +28,7 @@ const [icon, setIcon] = useState({
 
         e.preventDefault();
         const city = e.target.elements.city.value;
-         const country = e.target.elements.country.value;
+        const country = e.target.elements.country.value;
 
      try{
 
@@ -37,6 +36,7 @@ const [icon, setIcon] = useState({
 
           const weather = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city},${country}&appid=${API_key}`);
           const response = await weather.json();
+          console.log(response, "response is here");
 
           setFields({
               city: `${response.name}, ${response.sys.country}`,
@@ -47,9 +47,9 @@ const [icon, setIcon] = useState({
               temp_min: calCelsius(response.main.temp_min),
               description: response.weather[0].description,
               error: false
+              })
 
-          })
-          console.log(response.data);
+          console.log(response.data, "data is here");
 
        } else {
         alert("City and Country are required");
@@ -61,8 +61,11 @@ const [icon, setIcon] = useState({
       console.log(error && error);
 
      }
-    //fetchData(); I get an error is I call the function dont know why
   }
+
+//if(fields.data == undefined) {
+  //console.log("undefined data is render");
+//}
 
 
 
@@ -77,6 +80,7 @@ const [icon, setIcon] = useState({
   const calCelsius = (temperatura) => Math.floor(temperatura - 273.15);
 
   return(
+
   <div className="App">
       <h1>Weather app</h1>
 

@@ -34,12 +34,4 @@ const Form = props => {
 };
 
 
-
-const error = props => {
-  return(
-    <div className="alert alert-danger mx-6" role= "alert">
-      Please Enter City and Country...!
-     </div>
-    );
-};
 export default Form;
