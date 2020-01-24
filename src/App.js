@@ -7,11 +7,11 @@ import "weather-icons/css/weather-icons.css";
 import Form from './components/form';
 
 
-function App (props) {
+function App () {
 
 const API_key = "5dca448e69234b2a6a26f52ed3883a47";
 
-const [fields, setFields] = useState({});
+const [fields, setFields] = useState([]);
 
 
 const [icon, setIcon] = useState({
@@ -24,37 +24,45 @@ const [icon, setIcon] = useState({
       Clouds: "wi-day-fog"
  });
 
-  async function fetchData (e) {
-    e.preventDefault();
-    const city = e.target.elements.city.value;
-     const country = e.target.elements.country.value;
+
+  async function fetchData(e) {
+
+      e.preventDefault();
+      const city = e.target.elements.city.value;
+       const country = e.target.elements.country.value;
+     try{
+
+      if(country && city){
+
+          const weather = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city},${country}&appid=${API_key}`);
+          const response = await weather.json();
+
+          setFields({
+              city: `${response.name}, ${response.sys.country}`,
+              country: response.sys.country,
+              main: response.weather[0].main,
+              celsius: calCelsius(response.main.temp),
+              temp_max: calCelsius(response.main.temp_max),
+              temp_min: calCelsius(response.main.temp_min),
+              description: response.weather[0].description,
+              error: false
+
+          })
+          console.log(response.data && response.data);
+
+       } else {
+        alert("City and Country are required");
+       }
 
 
-     if(country && city){
-
-        const weather = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city},${country}&appid=${API_key}`);
-        const response = await weather.json();
-
-        setFields({
-            city: `${response.name}, ${response.sys.country}`,
-            country: response.sys.country,
-            main: response.weather[0].main,
-            celsius: calCelsius(response.main.temp),
-            temp_max: calCelsius(response.main.temp_max),
-            temp_min: calCelsius(response.main.temp_min),
-            description: response.weather[0].description,
-            error: false
-
-        })
-        console.log(response);
-        console.log(fields && fields);
-
-     } else {
-      alert("City and Country are required")
      }
+     catch(error){
+      console.log(error && error);
 
-
+     }
+    fetchData();
   }
+
 
 
 // aqui esto no procede porque no estamos cargando data una vez el componentDidMount, aqui esperamos a realizar una accion para cargar los datos,
@@ -65,11 +73,7 @@ const [icon, setIcon] = useState({
 //},[]);
 
 
-function calCelsius(temperatura){
-    let cell = Math.floor(temperatura - 273.15);
-    return cell;
-    }
-
+  const calCelsius = (temperatura) => Math.floor(temperatura - 273.15);
 
   return(
   <div className="App">
