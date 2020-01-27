@@ -7,9 +7,23 @@
   pointer-events: none;
 }
 
-.cards pt-4{
-  background-color: red;
-  color: red;
+.cards {
+  /*background-color: red; */
+  color: white;
+}
+.title {
+  color: black;
+}
+
+.py-3 {
+  color: black;
+}
+.wi {
+  color: black;
+}
+
+.px-4 {
+  color:black;
 }
 
 @media (prefers-reduced-motion: no-preference) {

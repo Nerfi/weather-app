@@ -19,11 +19,10 @@ const Weather = (props) => {
     <div className="container text-light">
       <div className="cards pt-4">
 
-      <h2>  {props.city}, {props.country} </h2>
+      <h2 className="title">  {props.city} </h2>
       <h5 className="py-4">
 
-        <i className={`wi ${props.weatherIcon} display-1`}></i>
-
+        <i className={`wi ${props.weatherIcon} display-1`} />
       </h5>
 
       <span className="py-2">{props.temp_celsius}&deg;</span>

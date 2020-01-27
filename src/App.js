@@ -11,7 +11,7 @@ function App () {
 
 const API_key = "5dca448e69234b2a6a26f52ed3883a47";
 
-const [fields, setFields] = useState({city: 'Madrid', country:''});
+const [fields, setFields] = useState({city: '', country: '', icon: ''});
 
 const [icon, setIcon] = useState({
       Thunderstorm: "wi-thunderstorm",
@@ -22,6 +22,20 @@ const [icon, setIcon] = useState({
       Clear: "wi-day-sunny",
       Clouds: "wi-day-fog"
  });
+
+//test, crear un const que guarde estos valores para luego re-escribir el estado.
+
+//setting up  icons
+  function weatherIcon(icons, rangeId) {
+    switch (true){
+      case rangeId >= 200 && rangeId < 232:
+      setIcon({ icon: icons.Thunderstorm });
+      break;
+      default:
+      setIcon({ icon: icons.Clouds});
+
+    }
+  }
 
 
   async function fetchData(e) {
@@ -36,7 +50,6 @@ const [icon, setIcon] = useState({
 
           const weather = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city},${country}&appid=${API_key}`);
           const response = await weather.json();
-          console.log(response, "response is here");
 
           setFields({
               city: `${response.name}, ${response.sys.country}`,
@@ -46,10 +59,11 @@ const [icon, setIcon] = useState({
               temp_max: calCelsius(response.main.temp_max),
               temp_min: calCelsius(response.main.temp_min),
               description: response.weather[0].description,
+              icon: weatherIcon(icon, response.weather[0].id),
               error: false
               })
 
-          console.log(response.data, "data is here");
+           weatherIcon(icon, response.weather[0].id);
 
        } else {
         alert("City and Country are required");
@@ -62,11 +76,6 @@ const [icon, setIcon] = useState({
 
      }
   }
-
-//if(fields.data == undefined) {
-  //console.log("undefined data is render");
-//}
-
 
 
 // aqui esto no procede porque no estamos cargando data una vez el componentDidMount, aqui esperamos a realizar una accion para cargar los datos,
@@ -94,7 +103,8 @@ const [icon, setIcon] = useState({
       temp_min={fields.temp_min}
       temp_max={fields.temp_max}
       description={fields.description}
-      weatherIcon={fields.icon}
+      icon={weatherIcon}
+
       />
 
 
