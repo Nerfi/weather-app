@@ -11,9 +11,12 @@ function App () {
 
 const API_key = "5dca448e69234b2a6a26f52ed3883a47";
 
-const [fields, setFields] = useState({city: '', country: '', icon: ''});
+const [fields, setFields] = useState({city: '', country: ''});
 
-const [icon, setIcon] = useState({
+const [icon, setIcon] = useState("");
+
+const icons = {
+
       Thunderstorm: "wi-thunderstorm",
       Drizzle: "wi-sleet",
       Rain: "wi-storm-showers",
@@ -21,9 +24,7 @@ const [icon, setIcon] = useState({
       Atmosphere: "wi-fog",
       Clear: "wi-day-sunny",
       Clouds: "wi-day-fog"
- });
-
-//test, crear un const que guarde estos valores para luego re-escribir el estado.
+}
 
 //setting up  icons
   function weatherIcon(icons, rangeId) {
@@ -31,8 +32,27 @@ const [icon, setIcon] = useState({
       case rangeId >= 200 && rangeId < 232:
       setIcon({ icon: icons.Thunderstorm });
       break;
+      case rangeId >= 300 && rangeId <= 321:
+      setIcon({icon: icons.Drizzle})
+      break;
+      case rangeId >= 500 && rangeId <= 521:
+      setIcon({icon: icons.Rain })
+      break;
+      case rangeId >= 600 && rangeId <= 622:
+      setIcon({ icon: icons.Snow})
+      break;
+      case rangeId >= 701 && rangeId <= 781:
+        setIcon({ icon: icons.Atmosphere });
+        break;
+        case rangeId === 800:
+        setIcon({ icon: icons.Clear });
+        break;
+        case rangeId >= 801 && rangeId <= 804:
+        setIcon({ icon: icons.Clouds });
+        break;
+
       default:
-      setIcon({ icon: icons.Clouds});
+      setIcon({ icon: icons.Clouds });
 
     }
   }
@@ -59,11 +79,13 @@ const [icon, setIcon] = useState({
               temp_max: calCelsius(response.main.temp_max),
               temp_min: calCelsius(response.main.temp_min),
               description: response.weather[0].description,
-              icon: weatherIcon(icon, response.weather[0].id),
+              icon: weatherIcon(response.weather[0].id),
               error: false
               })
 
-           weatherIcon(icon, response.weather[0].id);
+
+           weatherIcon(response.weather[0].id);
+
 
        } else {
         alert("City and Country are required");
@@ -103,7 +125,7 @@ const [icon, setIcon] = useState({
       temp_min={fields.temp_min}
       temp_max={fields.temp_max}
       description={fields.description}
-      icon={weatherIcon}
+      weatherIcon={fields.icon}
 
       />
 
