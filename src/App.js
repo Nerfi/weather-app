@@ -13,7 +13,7 @@ const API_key = "5dca448e69234b2a6a26f52ed3883a47";
 
 const [fields, setFields] = useState({city: '', country: ''});
 
-const [icon, setIcon] = useState({});
+const [icon, setIcon] = useState(undefined);
 
 const iconss = {
 
@@ -84,7 +84,7 @@ const iconss = {
               })
 
 
-           weatherIcon(iconss,response.weather[0].id);
+           //weatherIcon(iconss,response.weather[0].id);
 
 
        } else {
@@ -126,6 +126,8 @@ const iconss = {
       temp_max={fields.temp_max}
       description={fields.description}
       weatherIcon={fields.icon}
+
+
 
       />
 

@@ -1,3 +1,4 @@
+
 import React from 'react';
 
 
@@ -22,7 +23,7 @@ const Weather = (props) => {
       <h2 className="title">  {props.city} </h2>
       <h5 className="py-4">
 
-        <i className={`wi ${props.weatherIcon} display-1`} />
+        <img alt="weathericon" className={`wi ${props.weatherIcon} display-1`} />
       </h5>
 
       <span className="py-2">{props.temp_celsius}&deg;</span>
