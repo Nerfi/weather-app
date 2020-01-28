@@ -13,7 +13,7 @@ const API_key = "5dca448e69234b2a6a26f52ed3883a47";
 
 const [fields, setFields] = useState({city: '', country: ''});
 
-const [icon, setIcon] = useState(undefined);
+const [icon, setIcon] = useState({icon: ''});
 
 const iconss = {
 
@@ -27,32 +27,32 @@ const iconss = {
 }
 
 //setting up  icons
-  function weatherIcon(icons, rangeId) {
-    switch (true){
+  function weatherIcon(rangeId) {
+    switch (rangeId){
       case rangeId >= 200 && rangeId < 232:
-      setIcon({ icon: icons.Thunderstorm });
+      setIcon({ icon: iconss.Thunderstorm });
       break;
       case rangeId >= 300 && rangeId <= 321:
-      setIcon({icon: icons.Drizzle})
+      setIcon({icon: iconss.Drizzle})
       break;
       case rangeId >= 500 && rangeId <= 521:
-      setIcon({icon: icons.Rain })
+      setIcon({icon: iconss.Rain })
       break;
       case rangeId >= 600 && rangeId <= 622:
-      setIcon({ icon: icons.Snow})
+      setIcon({ icon: iconss.Snow})
       break;
       case rangeId >= 701 && rangeId <= 781:
-        setIcon({ icon: icons.Atmosphere });
+        setIcon({ icon: iconss.Atmosphere });
         break;
         case rangeId === 800:
-        setIcon({ icon: icons.Clear });
+        setIcon({ icon: iconss.Clear });
         break;
         case rangeId >= 801 && rangeId <= 804:
-        setIcon({ icon: icons.Clouds });
+        setIcon({ icon: iconss.Clouds });
         break;
 
       default:
-      setIcon({ icon: icons.Clouds });
+      setIcon({ icon: iconss.Clouds });
 
     }
   }
@@ -82,9 +82,14 @@ const iconss = {
               icon: weatherIcon(response.weather[0].id),
               error: false
               })
+               // setting up icon state
+              setIcon({
+                icon:  weatherIcon(response.weather[0].id)
+              })
+
+              console.log(icon ? " working" : "no wokring"  );
 
 
-           //weatherIcon(iconss,response.weather[0].id);
 
 
        } else {
@@ -125,9 +130,7 @@ const iconss = {
       temp_min={fields.temp_min}
       temp_max={fields.temp_max}
       description={fields.description}
-      weatherIcon={fields.icon}
-
-
+      weatherIcon={icon.icon}
 
       />
 
