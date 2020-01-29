@@ -4,7 +4,6 @@ import React from 'react';
 
 const Weather = (props) => {
 
-  //change some styling with css not using tags such as h5 an son on.
   function minmaxTemp(min,max) {
   return(
       <h3>
@@ -21,6 +20,7 @@ const Weather = (props) => {
       <div className="cards pt-4">
 
       <h2 className="title">  {props.city} </h2>
+
       <h5 className="py-4">
 
         <i className={`wi ${props.weatherIcon} display-1`} />

@@ -13,7 +13,8 @@ const API_key = "5dca448e69234b2a6a26f52ed3883a47";
 
 const [fields, setFields] = useState({city: '', country: ''});
 
-const [icon, setIcon] = useState({icon: ''});
+const [icon, setIcon] = useState({});
+console.log(icon, "just gets log the default state");
 
 const iconss = {
 
@@ -29,20 +30,20 @@ const iconss = {
 //setting up  icons
   function weatherIcon(rangeId) {
     switch (rangeId){
-      case rangeId >= 200 && rangeId < 232:
-      setIcon({ icon: iconss.Thunderstorm });
-      break;
-      case rangeId >= 300 && rangeId <= 321:
-      setIcon({icon: iconss.Drizzle})
-      break;
-      case rangeId >= 500 && rangeId <= 521:
-      setIcon({icon: iconss.Rain })
-      break;
-      case rangeId >= 600 && rangeId <= 622:
-      setIcon({ icon: iconss.Snow})
-      break;
-      case rangeId >= 701 && rangeId <= 781:
-        setIcon({ icon: iconss.Atmosphere });
+        case rangeId >= 200 && rangeId < 232:
+        setIcon({ icon: iconss.Thunderstorm });
+        break;
+        case rangeId >= 300 && rangeId <= 321:
+        setIcon({icon: iconss.Drizzle})
+        break;
+        case rangeId >= 500 && rangeId <= 521:
+        setIcon({icon: iconss.Rain })
+        break;
+        case rangeId >= 600 && rangeId <= 622:
+        setIcon({ icon: iconss.Snow})
+        break;
+        case rangeId >= 701 && rangeId <= 781:
+          setIcon({ icon: iconss.Atmosphere });
         break;
         case rangeId === 800:
         setIcon({ icon: iconss.Clear });
@@ -82,12 +83,13 @@ const iconss = {
               icon: weatherIcon(response.weather[0].id),
               error: false
               })
-               // setting up icon state
-              setIcon({
-                icon:  weatherIcon(response.weather[0].id)
-              })
 
-              console.log(icon ? " working" : "no wokring"  );
+               // setting up icon state
+            //setIcon({
+              //  icon:  weatherIcon(response.weather[0].id)
+              //})
+
+              console.log(icon ? " working" : "no wokring");
 
 
 
