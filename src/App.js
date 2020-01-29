@@ -14,7 +14,7 @@ const API_key = "5dca448e69234b2a6a26f52ed3883a47";
 const [fields, setFields] = useState({city: '', country: ''});
 console.log(fields);
 const [icon, setIcon] = useState({});
-console.log(icon, "just gets log the default state");
+//console.log(icon, "just gets log the default state");
 
 const iconss = {
 
@@ -83,8 +83,9 @@ const iconss = {
               icon: weatherIcon(response.weather[0].id),
               error: false
               })
+          console.log(response);
 
-               // setting up icon state, once I comment put this, the default icon shows up
+               // setting up icon state, once I comment out the setIcon function , the default icon shows up
                // still the bug , becuase in any city the default icon shows up, line 56 default:
             //showsetIcon({ icon: iconss.Clouds });
 
@@ -92,8 +93,6 @@ const iconss = {
             //setIcon({
                //icon:  weatherIcon(response.weather[0].id)
               //})
-
-              console.log(icon ? " working" : "no wokring");
 
 
        } else {
