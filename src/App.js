@@ -84,7 +84,11 @@ const iconss = {
               error: false
               })
 
-               // setting up icon state
+               // setting up icon state, once I comment put this, the default icon shows up
+               // still the bug , becuase in any city the default icon shows up, line 56 default:
+            //showsetIcon({ icon: iconss.Clouds });
+
+         // }
             //setIcon({
               //  icon:  weatherIcon(response.weather[0].id)
               //})
