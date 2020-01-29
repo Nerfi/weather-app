@@ -12,7 +12,6 @@ function App () {
 const API_key = "5dca448e69234b2a6a26f52ed3883a47";
 
 const [fields, setFields] = useState({city: '', country: ''});
-console.log(fields);
 const [icon, setIcon] = useState({});
 //console.log(icon, "just gets log the default state");
 
@@ -27,9 +26,10 @@ const iconss = {
       Clouds: "wi-day-fog"
 }
 
-//setting up  icons
+
+        //setting up  icons
   function weatherIcon(rangeId) {
-    switch (rangeId){
+    switch (true){
         case rangeId >= 200 && rangeId < 232:
         setIcon({ icon: iconss.Thunderstorm });
         break;
@@ -53,7 +53,7 @@ const iconss = {
         break;
 
       default:
-      setIcon({ icon: iconss.Clouds });
+      setIcon({ icon: iconss.Rain });
 
     }
   }
@@ -65,6 +65,7 @@ const iconss = {
         const city = e.target.elements.city.value;
         const country = e.target.elements.country.value;
 
+
      try{
 
       if(country && city){
@@ -75,23 +76,20 @@ const iconss = {
           setFields({
               city: `${response.name}, ${response.sys.country}`,
               country: response.sys.country,
-              main: response.weather[0].main,
               celsius: calCelsius(response.main.temp),
               temp_max: calCelsius(response.main.temp_max),
               temp_min: calCelsius(response.main.temp_min),
               description: response.weather[0].description,
-              icon: weatherIcon(response.weather[0].id),
+              icono: weatherIcon(response.weather[0].id),
               error: false
               })
-          console.log(response);
+          console.log(response, "linea 85 cargando");
 
                // setting up icon state, once I comment out the setIcon function , the default icon shows up
                // still the bug , becuase in any city the default icon shows up, line 56 default:
-            //showsetIcon({ icon: iconss.Clouds });
 
-         // }
-            //setIcon({
-               //icon:  weatherIcon(response.weather[0].id)
+           // setIcon({
+             //  icono:  weatherIcon(response.weather[0].id)
               //})
 
 
