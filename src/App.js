@@ -12,7 +12,7 @@ function App () {
 const API_key = "5dca448e69234b2a6a26f52ed3883a47";
 
 const [fields, setFields] = useState({city: '', country: ''});
-
+console.log(fields);
 const [icon, setIcon] = useState({});
 console.log(icon, "just gets log the default state");
 
@@ -90,12 +90,10 @@ const iconss = {
 
          // }
             //setIcon({
-              //  icon:  weatherIcon(response.weather[0].id)
+               //icon:  weatherIcon(response.weather[0].id)
               //})
 
               console.log(icon ? " working" : "no wokring");
-
-
 
 
        } else {
