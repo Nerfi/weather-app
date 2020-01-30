@@ -23,7 +23,7 @@ const Weather = (props) => {
 
       <h5 className="py-4">
 
-        <i className={`wi ${props.weatherIcon} display-1`} />
+        <i className={`wi ${props.weatherIcon && props.weatherIcon} display-1`} />
       </h5>
 
       <span className="py-2">{props.temp_celsius}&deg;</span>
